@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>𝕋𝕠𝕤𝕤 𝕂𝕚𝕟𝕘 𝕊𝕦𝕝𝕥𝕒𝕟</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100%; width: 100%; overflow-x: hidden; overflow-y: auto; font-family: 'Nunito', sans-serif; }
+
+    body { background: #09050f; }
+
+    /* Purple dark BG */
+    .bg {
+      position: fixed; inset: 0; z-index: 0;
+      background: #050510;
+      background-image:
+        radial-gradient(ellipse at 20% 20%, rgba(139,92,246,0.1) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 80%, rgba(109,40,217,0.07) 0%, transparent 50%);
+    }
+    .bg::after {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(139,92,246,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139,92,246,0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    .wrapper { position: relative; z-index: 10; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* TICKER — safe words only */
+    .ticker { overflow: hidden; white-space: nowrap; flex-shrink: 0; background: rgba(139,92,246,0.85); }
+    .roll { display: inline-block; animation: roll 20s linear infinite; }
+    @keyframes roll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* HERO */
+    .hero {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 32px 22px 16px; text-align: center; min-height: 0;
+    }
+
+    /* Crown circle — like Natraj */
+    .crown-circle {
+      width: 90px; height: 90px; border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, #1a1a2e, #0d0d1a);
+      border: 2px solid rgba(139,92,246,0.35);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 40px; margin-bottom: 10px;
+      box-shadow: 0 0 28px rgba(139,92,246,0.3);
+      animation: crownpulse 3s ease-in-out infinite;
+      position: relative; z-index: 1;
+    }
+    @keyframes crownpulse {
+      0%,100% { box-shadow: 0 0 20px rgba(139,92,246,0.3); }
+      50%      { box-shadow: 0 0 40px rgba(139,92,246,0.6); }
+    }
+
+    .ch-label { font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(139,92,246,0.5); margin-bottom: 10px; position: relative; z-index: 1; }
+
+    /* Big name — Natraj style */
+    .name-toss {
+      font-family: 'Russo One', sans-serif;
+      font-size: clamp(3.8rem, 18vw, 8rem);
+      color: #ffffff; line-height: 0.85;
+      letter-spacing: -0.01em; position: relative; z-index: 1;
+    }
+    .name-mafiya {
+      font-family: 'Russo One', sans-serif;
+      font-size: clamp(2rem, 9vw, 4rem);
+      background: linear-gradient(90deg, #8b5cf6, #c4b5fd, #8b5cf6);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; line-height: 0.9; letter-spacing: 0.05em;
+      position: relative; z-index: 1;
+    }
+
+    /* Dot divider */
+    .dot-div {
+      display: flex; align-items: center; gap: 8px;
+      margin: 14px auto; position: relative; z-index: 1;
+    }
+    .dot-div-line { flex: 1; max-width: 60px; height: 1px; background: rgba(139,92,246,0.2); }
+    .dot-div-dot { width: 6px; height: 6px; border-radius: 50%; background: #8b5cf6; }
+
+    /* Subtext */
+    .subtext { font-size: 0.78rem; color: rgba(255,255,255,0.32); font-weight: 300; line-height: 1.7; max-width: 270px; margin: 0 auto; position: relative; z-index: 1; }
+
+    /* Stat bars — like Natraj */
+    .bars { width: 100%; max-width: 320px; display: flex; flex-direction: column; gap: 8px; margin-top: 16px; position: relative; z-index: 1; }
+    .bar-row { display: flex; align-items: center; gap: 10px; }
+    .bar-lbl { font-family: 'Russo One', sans-serif; font-size: 11px; color: rgba(255,255,255,0.3); width: 52px; text-align: right; flex-shrink: 0; letter-spacing: 0.06em; }
+    .bar-track { flex: 1; height: 5px; background: rgba(255,255,255,0.06); border-radius: 99px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+    .bar-pct { font-family: 'Russo One', sans-serif; font-size: 12px; color: #a78bfa; width: 36px; text-align: left; flex-shrink: 0; }
+
+    .b1{animation:b1 1.5s ease forwards 0.1s;width:0} @keyframes b1{to{width:93%}}
+    .b2{animation:b2 1.5s ease forwards 0.22s;width:0} @keyframes b2{to{width:88%}}
+    .b3{animation:b3 1.5s ease forwards 0.34s;width:0} @keyframes b3{to{width:85%}}
+
+    /* 2x2 feature chips — like Natraj */
+    .feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; width: 100%; max-width: 320px; position: relative; z-index: 1; }
+    .feat-cell {
+      background: rgba(139,92,246,0.07);
+      border: 1px solid rgba(139,92,246,0.18);
+      border-radius: 12px; padding: 10px 12px;
+      display: flex; align-items: center; gap: 8px; text-align: left;
+    }
+    .feat-ico { font-size: 20px; flex-shrink: 0; }
+    .feat-title { font-size: 12px; font-weight: 700; color: #fff; line-height: 1.2; }
+    .feat-sub { font-size: 9px; color: rgba(255,255,255,0.28); margin-top: 1px; }
+
+    /* Live dot */
+    .pingo { animation: pingo 1.3s cubic-bezier(0,0,.2,1) infinite; }
+    @keyframes pingo { 75%,100%{transform:scale(2.2);opacity:0} }
+
+    /* CTA — full width purple like Natraj */
+    .cta {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; min-height: 52px;
+      background: linear-gradient(135deg, #6d28d9, #8b5cf6);
+      color: #fff; font-family: 'Russo One', sans-serif;
+      font-size: clamp(0.88rem, 4vw, 1rem); letter-spacing: 0.06em;
+      border-radius: 14px; text-decoration: none;
+      position: relative; overflow: hidden;
+      box-shadow: 0 6px 32px rgba(109,40,217,0.45);
+      transition: transform .18s; -webkit-tap-highlight-color: transparent;
+    }
+    .cta svg { flex-shrink: 0; width: 18px; height: 18px; }
+    .cta::after {
+      content: ''; position: absolute; top:0; left:-100%; width:50%; height:100%;
+      background: linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);
+      transform: skewX(-18deg); animation: shine 3s ease-in-out infinite;
+    }
+    @keyframes shine { 0%,65%{left:-100%} 100%{left:160%} }
+    .cta:active { transform: scale(0.97); }
+  </style>
+ </head>
+<body>
+
+  <div class="bg"></div>
+
+  <div class="wrapper">
+
+    <!-- TICKER — Facebook safe words -->
+    <div class="ticker py-1.5">
+      <div class="roll" style="font-size:11px;font-weight:700;letter-spacing:0.16em;color:rgba(255,255,255,0.92);">
+        <span style="padding:0 16px;">🎯 TOSS MAFIYA •</span>
+        <span style="padding:0 16px;">TOSS UPDATES •</span>
+        <span style="padding:0 16px;">T20 ANALYSIS •</span>
+        <span style="padding:0 16px;">FREE CHANNEL •</span>
+        <span style="padding:0 16px;">LIVE ALERTS •</span>
+        <span style="padding:0 16px;">MATCH UPDATES •</span>
+        <span style="padding:0 16px;">IPL COVERAGE •</span>
+        <span style="padding:0 16px;">🎯 TOSS MAFIYA •</span>
+        <span style="padding:0 16px;">TOSS UPDATES •</span>
+        <span style="padding:0 16px;">T20 ANALYSIS •</span>
+        <span style="padding:0 16px;">FREE CHANNEL •</span>
+        <span style="padding:0 16px;">LIVE ALERTS •</span>
+        <span style="padding:0 16px;">MATCH UPDATES •</span>
+        <span style="padding:0 16px;">IPL COVERAGE •</span>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+
+      <!-- Crown circle -->
+      <div class="crown-circle">
+        <img src="profile.jpg" class="rounded-lg" alt="">
+      </div>
+
+      <p class="ch-label">Telegram Channel</p>
+
+      <!-- Name -->
+      <div style="position:relative;z-index:1;">
+        <div class="name-toss">TOSS KING</div>
+        <div class="name-mafiya">SULTAN</div>
+      </div>
+
+      <!-- Dot divider -->
+      <div class="dot-div">
+        <div class="dot-div-line"></div>
+        <div class="dot-div-dot"></div>
+        <div class="dot-div-dot" style="background:rgba(139,92,246,0.4);width:4px;height:4px;"></div>
+        <div class="dot-div-dot"></div>
+        <div class="dot-div-line"></div>
+      </div>
+
+      
+      <!-- Bars -->
+      <div class="bars">
+        <div class="bar-row">
+          <span class="bar-lbl">TOSS</span>
+          <div class="bar-track"><div class="b1 bar-fill"></div></div>
+          <span class="bar-pct">93%</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-lbl">IPL</span>
+          <div class="bar-track"><div class="b2 bar-fill"></div></div>
+          <span class="bar-pct">88%</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-lbl">T20</span>
+          <div class="bar-track"><div class="b3 bar-fill"></div></div>
+          <span class="bar-pct">85%</span>
+        </div>
+      </div>
+
+      <!-- 2x2 chips -->
+      <div class="feat-grid">
+        <div class="feat-cell">
+          <div class="feat-ico">🎯</div>
+          <div>
+            <div class="feat-title">Toss Updates</div>
+            <div class="feat-sub">Daily info</div>
+          </div>
+        </div>
+        <div class="feat-cell">
+          <div class="feat-ico">⚡</div>
+          <div>
+            <div class="feat-title">Live Alerts</div>
+            <div class="feat-sub">Instant</div>
+          </div>
+        </div>
+        <div class="feat-cell">
+          <div class="feat-ico">📊</div>
+          <div>
+            <div class="feat-title">Analysis</div>
+            <div class="feat-sub">Deep stats</div>
+          </div>
+        </div>
+        <div class="feat-cell">
+          <div class="feat-ico">🆓</div>
+          <div>
+            <div class="feat-title">Free</div>
+            <div class="feat-sub">No cost ever</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live dot -->
+      <div class="flex items-center gap-2 mt-4" style="position:relative;z-index:1;">
+        <span style="position:relative;display:inline-flex;width:8px;height:8px;">
+          <span class="pingo" style="position:absolute;inset:0;border-radius:50%;background:#8b5cf6;opacity:0.75;display:inline-flex;width:100%;height:100%;"></span>
+          <span style="position:relative;width:8px;height:8px;border-radius:50%;background:#8b5cf6;display:inline-flex;flex-shrink:0;"></span>
+        </span>
+        <span style="font-size:10px;color:rgba(255,255,255,0.28);">Members active right now</span>
+      </div>
+
+      <!-- CTA + FOOTER -->
+      <div style="padding:12px 20px 24px;display:flex;flex-direction:column;gap:10px;">
+        <a href="https://t.me/+dzdjls5d0HFlM2U1" target="_blank" class="cta">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+          </svg>
+          JOIN FREE ON TELEGRAM
+        </a>
+        <p style="text-align:center;font-size:9px;color:rgba(255,255,255,0.15);">For entertainment & informational purposes only · © 2026 Toss Mafiya</p>
+      </div>
+    </div>
+
+
+  </div>
+
+</body>
+</html>
